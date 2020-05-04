@@ -1,0 +1,63 @@
+//creacion de datos estudiante//
+
+create (juan:estudiante {est_id: "0001", est_name:"juan manuel", est_fec:"09/10/1996"})
+create (pepito:estudiante {est_id: "0002", est_name:"pepito perez", est_fec:"09/03/1997"})
+create (jeison:estudiante {est_id: "0003", est_name:"jeison torres", est_fec:"09/10/1998"})
+create (cristian:estudiante {est_id: "0004", est_name:"cristian smith", est_fec:"09/11/1999"})
+create (manuel:estudiante {est_id: "0005", est_name:"manuel gamboa", est_fec:"09/12/1995"})
+
+//creacion de datos materia//
+
+create (bases:materia {mat_id: "0001", mat_name:"bases de datos", mat_cre:"4"})
+create (estructura:materia {mat_id: "0002", mat_name:"estructura de datos", mat_cre:"3"})
+create (sistemas:materia {mat_id: "0003", mat_name:"sistemas operativos", mat_cre:"3"})
+create (calculo:materia {mat_id: "0010", mat_name:"calculo integral", mat_cre:"4"})
+create (algebra:materia {mat_id: "0011", mat_name:"algebra", mat_cre:"3"})
+
+//creacion de datos docente//
+
+create (carrillo:docente {doc_id: "0011", doc_name:"carrillo",doc_ape : "rojas", doc_sal:"3000000"})
+create (luis:docente {doc_id: "0012", doc_name:"luis",doc_ape : "perez", doc_sal:"3500000"})
+create (mauricio:docente {doc_id: "0013", doc_name:"mauricio",doc_ape : "torres", doc_sal:"2500000"})
+create (luz:docente {doc_id: "0012", doc_name:"luz",doc_ape : "contreras", doc_sal:"5000000"})
+create (esteban:docente {doc_id: "0011", doc_name:"esteban",doc_ape : "cordoba", doc_sal:"2600000"})
+
+//creacion de datos facultad//
+
+create (ingenierias:facultad {fac_id: "001", fac_name:"ingenierias"})
+create (ciencias:facultad {fac_id: "002", fac_name:"ciencias agrarias"})
+create (salud:facultad {fac_id: "001", fac_name:"salud"})
+
+//creacion de datos departamento//
+
+create (matematicas:departamento { dep_id:"001", dep_nombre: "matematicas" })
+create (sistemas:departamento { dep_id:"001", dep_nombre: "sistemas" })
+
+//relaciones//
+
+match (juan:estudiante {est_name : "juan manuel"}), (operativos:materia {mat_name : "sistemas operativos"}) 
+create (juan)-[:asiste]->(operativos)
+
+match (pepito:estudiante {est_name : "pepito perez"}), (operativos:materia {mat_name : "sistemas operativos"}) 
+create (pepito)-[:asiste]->(operativos)
+
+match (pepito:estudiante {est_name : "pepito perez"}), ( algebra:materia {mat_name : "algebra"}) 
+create (pepito)-[:asiste]->(algebra)
+
+match (pepito:estudiante {est_name : "pepito perez"}), (calculo:materia {mat_name : "calculo integral"}) 
+create (pepito)-[:asiste]->(calculo)
+
+
+match (calculo:materia {mat_name : "calculo integral"}), (matematicas:departamento {dep_nombre : "matematicas"}) 
+create (calculo)-[:pertenece]->(matematicas)
+
+match (algebra:materia {mat_name : "algebra"}), (matematicas:departamento {dep_nombre : "matematicas"}) 
+create (algebra)-[:pertenece]->(matematicas)
+
+match (matematicas:departamento {dep_nombre : "matematicas"}), (ciencias:facultad { fac_name:"ciencias agrarias"})
+create (matematicas)-[:pertenece]->(ciencias)
+
+
+
+
+
